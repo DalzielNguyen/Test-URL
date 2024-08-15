@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <script>
+        function redirectToCustomURL() {
+            // Tạo mảng các URL và tỷ lệ tương ứng
+            const urls = [
+                { url: "https://example.com/1", weight: 30 },
+                { url: "https://example.com/2", weight: 20 },
+                { url: "https://example.com/3", weight: 10 },
+                { url: "https://example.com/4", weight: 25 },
+                { url: "https://example.com/5", weight: 15 }
+            ];
+            
+            // Tính tổng trọng số
+            const totalWeight = urls.reduce((sum, url) => sum + url.weight, 0);
+
+            // Sinh số ngẫu nhiên từ 0 đến tổng trọng số
+            let random = Math.random() * totalWeight;
+
+            // Chọn URL dựa trên trọng số
+            for (const url of urls) {
+                if (random < url.weight) {
+                    window.location.href = url.url;
+                    break;
+                }
+                random -= url.weight;
+            }
+        }
+        
+        window.onload = redirectToCustomURL;
+    </script>
+</head>
+<body>
+    <p>Đang chuyển hướng...</p>
+</body>
+</html>
